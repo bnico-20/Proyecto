@@ -8,4 +8,4 @@ class Partido(models.Model):
     resultado = models.CharField(max_length=10)
 
     def __str__(self):
-        return f"{self.fecha} - {self.rival} ({self.lugar})"
+        return f"{self.fecha} - {self.rival} ({self.lugar})" 
