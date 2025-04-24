@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block BERTIN FC %}
+<h3 style="color: cadetblue;">Lista de Jugadores:</h3>
+
+<ul>
+    {% for jugador in jugadores %}
+        <li>{{ jugador.nombre }} - {{ jugador.posicion }} ({{ jugador.numero }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BERTIN FC</title>
+</head>
+<body>
+    <header>
+        <h1>BERTIN FC</h1>
+        <nav>
+            <a href="{% url 'blog:equipo' %}">Equipo</a> |
+            <a href="{% url 'blog:partidos' %}">Partidos</a> |
+            <a href="{% url 'blog:agregar_jugador' %}">Agregar Jugador</a> |
+            <a href="{% url 'blog:buscar_jugadores' %}">Buscar Jugadores</a>
+        </nav>
+    </header>
+    <main>
+        {% block BERTIN FC %}
+        {% endblock %}
+    </main>
+</body>
+</html>
