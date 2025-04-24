@@ -1,11 +1,19 @@
 {% extends 'blog/base.html' %}
 
-{% block BERTIN FC %}
+{% block BERTIN_FC %}
 <h3 style="color: cadetblue;">Lista de Jugadores:</h3>
+
+<!-- Formulario de búsqueda -->
+<form method="GET" action="{% url 'blog:buscar_jugadores' %}">
+    <input type="text" name="q" placeholder="Buscar jugador..." value="{{ query|default:'' }}">
+    <button type="submit">Buscar</button>
+</form>
 
 <ul>
     {% for jugador in jugadores %}
         <li>{{ jugador.nombre }} - {{ jugador.posicion }} ({{ jugador.numero }})</li>
+    {% empty %}
+        <li>No se encontraron jugadores.</li>
     {% endfor %}
 </ul>
 {% endblock %}
