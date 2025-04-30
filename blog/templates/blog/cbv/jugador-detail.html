@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block BERTIN_FC %}
+<h3 style="color: cadetblue; text-align: center;">Detalles del Jugador</h3>
+
+<div style="max-width: 600px; margin: 2rem auto; text-align: center;">
+    <p><strong>Nombre:</strong> {{ jugador.nombre }}</p>
+    <p><strong>Posición:</strong> {{ jugador.posicion }}</p>
+    <p><strong>Número:</strong> {{ jugador.numero }}</p>
+    <a href="{% url 'blog:cbv-lista-jugadores' %}">Volver a la lista</a>
+</div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Partido, Jugador
 from .forms import BlogPartido, BlogJugador
+from django.urls import reverse_lazy
 
 def equipo(request):
     return render(request, 'blog/equipo.html')
@@ -27,5 +28,36 @@ def buscar_jugadores(request):
         jugadores = Jugador.objects.all()  # Muestra todos los jugadores si no hay búsqueda
     return render(request, 'blog/jugadores.html', {'jugadores': jugadores, 'query': query})
 
+def home(request):
+    return render(request, 'blog/home.html')
 
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+class jugadorList(ListView):
+    model = Jugador
+    template_name = 'blog/cbv/jugadores-list.html'
+    context_object_name = 'jugadores'
+
+class jugadorDetail(DetailView):
+    model = Jugador
+    template_name = 'blog/cbv/jugador-detail.html'
+    context_object_name = 'jugador'
     
+
+class jugadorCreate(CreateView):
+    model = Jugador
+    template_name = 'blog/cbv/jugador-create.html'
+    fields = ['nombre', 'posicion','numero']
+    success_url = reverse_lazy('blog:cbv-lista-jugadores')
+
+class jugadorUpdate(UpdateView):
+    model = Jugador
+    template_name = 'blog/cbv/jugador-update.html'
+    fields = ['nombre', 'posicion','numero']
+    success_url = reverse_lazy('blog:cbv-lista-jugadores')  # Redirige a la lista de jugadores
+
+class jugadorDelete(DeleteView):
+    model = Jugador
+    template_name = 'blog/cbv/jugador-delete.html'
+    context_object_name = 'jugador'
+    success_url = reverse_lazy('blog:cbv-lista-jugadores')

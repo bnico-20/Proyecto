@@ -7,16 +7,75 @@
 <body>
     <header>
         <h1>BERTIN FC</h1>
+        
+        {% if user.is_authenticated %}
+            <!-- Navegación principal -->
         <nav>
             <a href="{% url 'blog:equipo' %}">Equipo</a> |
             <a href="{% url 'blog:partidos' %}">Partidos</a> |
             <a href="{% url 'blog:agregar_jugador' %}">Agregar Jugador</a> |
             <a href="{% url 'blog:buscar_jugadores' %}">Buscar Jugadores</a>
         </nav>
+
+        <!-- Navegación para vistas basadas en clases -->
+        <div class="nav-section">
+            <div class="nav-title">⚙️ Funciones con CBV</div>
+            <nav>
+                <a href="{% url 'blog:cbv-alta-jugador' %}">CBV Alta</a>
+                <a href="{% url 'blog:cbv-lista-jugadores' %}">CBV Lista</a>
+            </nav>
+        </div>
+    {% endif %}
+
+    <!-- Navegación para autenticación -->
+    <div class="nav-section">
+        <div class="nav-title">🔐 Cuenta</div>
+        <nav>
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:logout' %}">Cerrar sesión ({{ user.username }})</a>
+            {% else %}
+                <a href="{% url 'accounts:login' %}">Iniciar sesión</a>
+                <a href="{% url 'accounts:signup' %}">Registrarse</a>
+                <a href="{% url 'accounts:logout' %}">Logout</a>
+                <p>Inicia sesión o regístrate para acceder a todas las funcionalidades.</p>
+            {% endif %}
+        </nav>
+    </div>
+
     </header>
+
     <main>
+        <!-- Mensaje de bienvenida -->
+        <div class="welcome-section">
+            {% if user.is_authenticated %}
+                <h2>Bienvenido, {{ user.username }} 👋</h2>
+                <p>Explora las últimas actualizaciones de Bertin FC.</p>
+            {% else %}
+                <h2>Bienvenido a Bertin FC ⚽</h2>
+                
+            {% endif %}
+        </div>
+
+        <!-- Enlaces destacados -->
+        <div class="featured-links">
+            <h3>Explora:</h3>
+            <ul>
+                <li><a href="{% url 'blog:equipo' %}">Conoce al equipo</a></li>
+                <li><a href="{% url 'blog:partidos' %}">Revisa los partidos</a></li>
+                <li><a href="{% url 'blog:buscar_jugadores' %}">Busca jugadores</a></li>
+                
+            </ul>
+        </div>
+
+        <!-- Bloque principal -->
         {% block BERTIN_FC %}
         {% endblock %}
     </main>
+
+    <footer>
+        <p>&copy; 2025 BERTIN FC. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
+
+

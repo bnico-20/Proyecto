@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block BERTIN_FC %}
+<h3 style="color: cadetblue; text-align: center;">📑 Lista de jugadores (CBV)</h3>
+
+<ul style="max-width: 600px; margin: 2rem auto; list-style: none; padding: 0;">
+    <!-- Loop through the list of players (jugadores) to display their details -->
+    {% for jugador in jugadores %}
+        <li style="margin-bottom: 1rem;">
+            <strong>{{ jugador.nombre }}</strong> ({{ jugador.posicion }})<br>
+            <a href="{% url 'blog:cbv-jugador-detail' jugador.pk %}">🔍 Ver</a> |
+            <a href="{% url 'blog:cbv-jugador-editar' jugador.pk %}">✏️ Editar</a> |
+            <a href="{% url 'blog:cbv-jugador-eliminar' jugador.pk %}">🗑 Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay jugadores registrados.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
