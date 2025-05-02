@@ -1,19 +1,32 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
 
 {% block BERTIN_FC %}
-<h3 style="color: cadetblue;">Lista de Jugadores:</h3>
+<h1 class="text-center text-primary mb-4">Buscar Jugadores</h1>
 
-<!-- Formulario de búsqueda -->
-<form method="GET" action="{% url 'blog:buscar_jugadores' %}">
-    <input type="text" name="q" placeholder="Buscar jugador..." value="{{ query|default:'' }}">
-    <button type="submit">Buscar</button>
-</form>
+<div class="row mb-4">
+    <div class="col-md-6 mx-auto">
+        <form method="get" class="d-flex">
+            <input type="text" name="q" class="form-control me-2" placeholder="Buscar por nombre..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+    </div>
+</div>
 
-<ul>
+<div class="row">
     {% for jugador in jugadores %}
-        <li>{{ jugador.nombre }} - {{ jugador.posicion }} ({{ jugador.numero }})</li>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ jugador.nombre }}</h5>
+                    <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
+                    <p class="card-text"><strong>Número:</strong> {{ jugador.numero }}</p>
+                    <a href="{% url 'blog:cbv-jugador-detail' jugador.pk %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
     {% empty %}
-        <li>No se encontraron jugadores.</li>
+        <p class="text-center text-muted">No se encontraron jugadores.</p>
     {% endfor %}
-</ul>
+</div>
+<a href="{% url 'blog:buscar_jugadores' %}">Volver a la lista</a>
 {% endblock %}

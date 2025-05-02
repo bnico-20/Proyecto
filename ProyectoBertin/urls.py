@@ -17,9 +17,18 @@ Including another URLconf
 # filepath: c:\Users\ext84003\Python\Django\ProyectoBertin\urls.py
 from django.contrib import admin
 from django.urls import path, include
+from ProyectoBertin.views import home
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    path('accounts/', include('accounts.urls')) 
+    path('accounts/', include('accounts.urls')),
+    path('', home, name='home'),
+
 ]
+
+#30/4
+# 👇 This serves media files during development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

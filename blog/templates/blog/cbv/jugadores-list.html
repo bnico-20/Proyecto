@@ -1,19 +1,23 @@
 {% extends "blog/base.html" %}
 
 {% block BERTIN_FC %}
-<h3 style="color: cadetblue; text-align: center;">📑 Lista de jugadores (CBV)</h3>
-
-<ul style="max-width: 600px; margin: 2rem auto; list-style: none; padding: 0;">
-    <!-- Loop through the list of players (jugadores) to display their details -->
+<h1 class="text-center mb-4">Lista de Jugadores</h1>
+<div class="row">
     {% for jugador in jugadores %}
-        <li style="margin-bottom: 1rem;">
-            <strong>{{ jugador.nombre }}</strong> ({{ jugador.posicion }})<br>
-            <a href="{% url 'blog:cbv-jugador-detail' jugador.pk %}">🔍 Ver</a> |
-            <a href="{% url 'blog:cbv-jugador-editar' jugador.pk %}">✏️ Editar</a> |
-            <a href="{% url 'blog:cbv-jugador-eliminar' jugador.pk %}">🗑 Eliminar</a>
-        </li>
-    {% empty %}
-        <li>No hay jugadores registrados.</li>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ jugador.nombre }}</h5>
+                    <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
+                    <p class="card-text"><strong>Número:</strong> {{ jugador.numero }}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'blog:cbv-jugador-detail' jugador.pk %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                        <a href="{% url 'blog:cbv-jugador-editar' jugador.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'blog:cbv-jugador-eliminar' jugador.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

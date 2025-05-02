@@ -1,15 +1,14 @@
 {% extends 'blog/base.html' %}
 
 {% block BERTIN_FC %}
-<h3 style="color: darkorange; text-align: center;">✏️ Editar jugador</h3>
+<h3 class="text-center text-primary mb-4">✏️ Editar jugador</h3>
 
-<form method="post" style="max-width: 500px; margin: 2rem auto;">
+<form method="post" style="max-width: 500px; margin: 2rem auto;" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <div style="text-align: center; margin-top: 1rem;">
-        <button type="submit">💾 Guardar cambios</button>
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">💾 Guardar cambios</button>
+        <a href="{% url 'blog:cbv-lista-jugadores' %}" class="btn btn-secondary">Cancelar</a>
     </div>
 </form>
-<a href="{% url 'blog:cbv-lista-jugadores' %}">Cancelar</a>
-
 {% endblock %}

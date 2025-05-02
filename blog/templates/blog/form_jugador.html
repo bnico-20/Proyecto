@@ -1,11 +1,18 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
 
 {% block BERTIN_FC %}
-<h3 style="color: cadetblue;">Agregar Jugador:</h3>
+<h1 class="text-center text-primary mb-4">Agregar Jugador</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ formulario.as_p }}
-    <button type="submit">Agregar Jugador</button>
-</form>
+<div class="card mx-auto" style="max-width: 500px;">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-success">Agregar Jugador</button>
+                <a href="{% url 'blog:buscar_jugadores' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

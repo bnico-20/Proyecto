@@ -1,18 +1,19 @@
-{% extends 'blog/base.html' %}
-
-{% load static %}
+{% extends "blog/base.html" %}
 
 {% block BERTIN_FC %}
-    <h3 style="color: cadetblue;">Agregar Jugador:</h3>
+<h1 class="text-center text-primary mb-4">Agregar Jugador</h1>
 
-  <h1>Alta de Jugador</h1>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div style="text-align: center; margin-top: 1rem;">
-        <button type="submit">Create</button>
+<div class="card mx-auto shadow-sm" style="max-width: 500px;">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-success">💾 Guardar Jugador</button>
+                <a href="{% url 'blog:cbv-lista-jugadores' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
     </div>
-  </form>
-  <a href="{% url 'blog:cbv-lista-jugadores' %}">Volver a la lista</a>
+</div>
 {% endblock %}
 

@@ -1,0 +1,67 @@
+#30/4
+
+{% extends 'blog/base.html' %}
+
+{% block BERTIN_FC %}
+<div class="container my-4">
+    <h3 class="text-center text-primary mb-4"><i class="bi bi-people"></i> Lista de Jugadores</h3>
+
+    <form method="get" class="mb-3">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle shadow-sm bg-white rounded">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            Nombre
+                            <input type="text" name="nombre" value="{{ filtros.nombre }}" class="form-control mt-1" placeholder="Buscar nombre">
+                        </th>
+                        <th>
+                            Equipo
+                            <input type="text" name="equipo" value="{{ filtros.equipo }}" class="form-control mt-1" placeholder="Buscar equipo">
+                        </th>
+                        <th>
+                            Edad
+                            <input type="number" name="edad" value="{{ filtros.edad }}" class="form-control mt-1" placeholder="Edad">
+                        </th>
+                        <th class="text-center">
+                            Acciones
+                            <div class="d-grid gap-1 mt-1">
+                                <button type="submit" class="btn btn-primary btn-sm btn-icon">
+                                    <i class="bi bi-search"></i> Filtrar
+                                </button>
+                                <a href="{% url 'blog:cbv-lista-jugador-filtrada' %}" class="btn btn-secondary btn-sm btn-icon">
+                                    <i class="bi bi-arrow-clockwise"></i> Limpiar
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for jugador in jugadores %}
+                        <tr>
+                            <td>{{ jugador.nombre }}</td>
+                            <td>{{ jugador.equipo }}</td>
+                            <td class="text-center">{{ jugador.edad }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'blog:cbv-jugador-detail' jugador.pk %}" class="btn btn-outline-info btn-sm btn-icon mb-1">
+                                    <i class="bi bi-eye"></i> Ver
+                                </a>
+                                <a href="{% url 'blog:cbv-jugador-editar' jugador.pk %}" class="btn btn-outline-warning btn-sm btn-icon mb-1">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </a>
+                                <a href="{% url 'blog:cbv-jugador-eliminar' jugador.pk %}" class="btn btn-outline-danger btn-sm btn-icon mb-1">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">No hay jugadores registrados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+{% endblock %}
